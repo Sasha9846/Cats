@@ -1,5 +1,19 @@
 const container = document.querySelector("main");
 const popupBlock = document.querySelector(".popup-wrapper");
+const PoBlock = document.querySelector('.oKote-wrapper')
+
+                                        //////
+
+document.querySelector(".oKote__close").addEventListener("click", function() {
+	PoBlock.classList.remove("active");
+});
+
+
+
+
+
+
+										
 
 popupBlock.querySelector(".popup__close").addEventListener("click", function() {
 	popupBlock.classList.remove("active");
@@ -52,6 +66,32 @@ const createCard = function(cat, parent) {
 
 	card.append(img, name, del);
 	parent.append(card);
+
+
+
+
+
+
+	let catCard = document.querySelectorAll(".card");     //а тут мы и работаем
+	for (i=0; i<catCard.length; i++){
+		catCard[i].addEventListener("click", function() {
+			
+			
+			
+			//console.log(PoBlock)         
+
+			PoBlock.classList.add("active")
+
+
+
+	})}
+	
+	
+
+
+
+
+	
 }
 
 
@@ -131,4 +171,26 @@ addForm.addEventListener("submit", function(e) {
 	console.log(body);
 	addCat(body);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let catCard = document.querySelectorAll(".card");
+for (i=0; i<catCard.length; i++){
+	catCard[i].addEventListener("click", function() {
+		console.log(catCard)
+})}
 
