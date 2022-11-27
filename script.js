@@ -50,6 +50,14 @@ const createCard = function(cat, parent) {
 	const name = document.createElement("h3");
 	name.innerText = cat.name;
 
+
+// const descr = document.createElement("p")
+// descr.innerText = cat.description
+
+
+
+
+
 	let like = "";
 	like.onclick = () => {
 		//....
@@ -183,14 +191,103 @@ addForm.addEventListener("submit", function(e) {
 
 
 
+//const creInfo  = document.createElement('div')
+//creInfo.innerText = cat.description
+
+//const cardInform = document.querySelector(".oKote__content")
+
+// cardInform.append(creInfo);
+
+
+
+// fetch("https://sb-cats.herokuapp.com/api/2/sasha9846/show") 
+ //.then(res => res.json()) 
+ 
+ //.then(result => { 
+	//creInfo.innerText = result.description
+//console.log(result.description)
+
+	
+ //})
 
 
 
 
 
-let catCard = document.querySelectorAll(".card");
-for (i=0; i<catCard.length; i++){
-	catCard[i].addEventListener("click", function() {
-		console.log(catCard)
-})}
 
+
+
+ 
+ fetch('https://sb-cats.herokuapp.com/api/2/sasha9846/show/${id}') 
+ 
+ .then(res => res.json()) 
+ 
+ .then(informatiya => { 
+	 
+	 if (informatiya.message === "ok") {
+		const catInCard = function(informatiya, rod) {
+			const inf = document.querySelector(".oKote__content");
+			
+		
+			
+		
+			const name = document.createElement("h3");
+			name.innerText = informatiya.name;
+		
+		const descr = document.createElement("p")
+		descr.innerText = informatiya.description
+		
+			inf.append(name, descr);
+			
+		}
+		
+		
+
+	 }
+ })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const fetchCardbyID = function () {
+    fetch(`https://sb-cats.herokuapp.com/api/2/sasha9846/show/${id}`)
+    .then(res => res.json())
+     
+    .then(result => {       
+       if(result.message === "ok") {
+          
+		alert(result.data)
+		oneCat = result.data;
+        
+ const catInCard = function(oneCat) {
+	const inf = document.querySelector(".oKote__content");
+alert(inf)
+
+	const name = document.createElement("h3");
+	name.innerText = oneCat.name;
+
+const descr = document.createElement("p")
+descr.innerText = oneCat.description
+
+	inf.append(name, descr);
+	
+}
+
+catInCard()
+
+     } else {
+        alert("Такого котика нет");
+     }
+    })
+}
