@@ -1,11 +1,11 @@
 const container = document.querySelector("main");
 const popupBlock = document.querySelector(".popup-wrapper");
-const PoBlock = document.querySelector('.oKote-wrapper')
+const poBlock = document.querySelector('.oKote-wrapper')
 
                                         //////
 
 document.querySelector(".oKote__close").addEventListener("click", function() {
-	PoBlock.classList.remove("active");
+	poBlock.classList.remove("active");
 });
 
 
@@ -86,10 +86,11 @@ const createCard = function(cat, parent) {
 			
 			
 			
-			//console.log(PoBlock)         
+			       
 
-			PoBlock.classList.add("active")
-
+			poBlock.classList.add("active")
+const id = this.id;
+fetchCardbyID(id)
 
 
 	})}
@@ -107,7 +108,7 @@ const createCard = function(cat, parent) {
 //createCard({name: "Вася", img_link: "https://www.friendforpet.ru/api/sites/default/files/2022-01/%D0%BB%D0%B5%D0%B2%D0%B83_%D0%B0%D0%BB%D0%B5%D0%BA%D1%81.jpg"}, container);
 
 // запрос на сервер
-fetch("https://sb-cats.herokuapp.com/api/2/sasha9846/show") 
+fetch("https://srv.petiteweb.dev/api/2/sasha9846/show") 
 	// ответ от сервера что такой запрос существует
 	.then(res => res.json()) 
 	// получение результата
@@ -132,7 +133,7 @@ fetch("https://sb-cats.herokuapp.com/api/2/sasha9846/show")
 // JSON.parse(str) - сделает из строки объект (если внутри строки объек)
 
 const addCat = function(cat) {
-	fetch("https://sb-cats.herokuapp.com/api/2/sasha9846/add", {
+	fetch("https://srv.petiteweb.dev/api/2/sasha9846/add", {
 		method: "POST",
 		headers: { // обязательно для POST/PUT/PATCH
 			"Content-Type": "application/json"
@@ -151,7 +152,7 @@ const addCat = function(cat) {
 }
 
 const deleteCat = function(id, tag) {
-	fetch(`https://sb-cats.herokuapp.com/api/2/sasha9846/delete/${id}`, {
+	fetch(`https://srv.petiteweb.dev/api/2/sasha9846/delete/${id}`, {
 		method: "DELETE"
 	})
 	.then(res => res.json())
@@ -217,34 +218,6 @@ addForm.addEventListener("submit", function(e) {
 
 
 
- 
- fetch('https://sb-cats.herokuapp.com/api/2/sasha9846/show/${id}') 
- 
- .then(res => res.json()) 
- 
- .then(informatiya => { 
-	 
-	 if (informatiya.message === "ok") {
-		const catInCard = function(informatiya, rod) {
-			const inf = document.querySelector(".oKote__content");
-			
-		
-			
-		
-			const name = document.createElement("h3");
-			name.innerText = informatiya.name;
-		
-		const descr = document.createElement("p")
-		descr.innerText = informatiya.description
-		
-			inf.append(name, descr);
-			
-		}
-		
-		
-
-	 }
- })
 
 
 
@@ -260,34 +233,65 @@ addForm.addEventListener("submit", function(e) {
 
 
 
-const fetchCardbyID = function () {
-    fetch(`https://sb-cats.herokuapp.com/api/2/sasha9846/show/${id}`)
+// const fetchCardbyID = function (id) {
+//     fetch(`https://sb-cats.herokuapp.com/api/2/sasha9846/show/${id}`)
+//     .then(res => res.json())
+     
+//     .then(result => {       
+//        if(result.message === "ok") {
+          
+// 		console.log(result.name)
+// 		oneCat = result.data;
+        
+//  const catInCard = function(oneCat) {
+// 	const inf = document.querySelector(".oKote__content");
+
+
+// 	const name = document.createElement("h3");
+// 	name.innerText = oneCat.name;
+
+// const descr = document.createElement("p");
+// descr.innerText = oneCat.description
+
+// 	inf.append(name, descr);
+	
+// }
+
+// catInCard()
+
+//      } else {
+//         alert("Такого котика нет");
+//      }
+//     })
+// }
+
+const fetchCardbyID = function (catId) {
+    fetch(`https://srv.petiteweb.dev/api/2/sasha9846/show/${catId}`)
     .then(res => res.json())
      
     .then(result => {       
        if(result.message === "ok") {
-          
-		alert(result.data)
-		oneCat = result.data;
-        
- const catInCard = function(oneCat) {
-	const inf = document.querySelector(".oKote__content");
-alert(inf)
-
-	const name = document.createElement("h3");
-	name.innerText = oneCat.name;
-
-const descr = document.createElement("p")
-descr.innerText = oneCat.description
-
-	inf.append(name, descr);
-	
-}
-
-catInCard()
-
+          const oneCat = result.data;
+   
+    const nameCat = document.querySelector("#catName") ;
+    nameCat.setAttribute("value",oneCat.name);
+    const catId = document.querySelector("#catId");
+    catId.setAttribute("value", oneCat.id);
+    const imgCat = document.querySelector("#imgCat");
+    imgCat.setAttribute("value", oneCat.img_link);
+    const ageCat = document.querySelector("#ageCat");
+    ageCat.setAttribute("value", oneCat.age);
+    const rateCat = document.querySelector("#rateCat");
+    rateCat.setAttribute("value", oneCat.rate);
+	const obCat = document.querySelector("#obCat");
+    obCat.setAttribute("value", oneCat.description);
      } else {
         alert("Такого котика нет");
      }
     })
 }
+
+
+
+
+

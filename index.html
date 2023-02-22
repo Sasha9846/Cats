@@ -54,7 +54,28 @@
         <div class="oKote">
             <div class="oKote__close"></div>
             <div class="oKote__content">
-               
+
+
+                <h2>Информация о питомце</h2>
+        <form id="show_data">
+            <h6>Имя кисика</h6>
+            <input type="text" id="catName" name="name" value=" " >
+            <h6>id</h6>
+            <input type="number" id="catId" name="id" value=" " readonly >
+            <h6>Cсылка на фото</h6>
+            <input type="text" id="imgCat" name="img_link" value=" ">
+            <h6>Возраст</h6>
+            <input type="number" id="ageCat" name="age" min= "0" max="31" >
+            <h6>Рейтинг</h6>
+            <input type="number" id="rateCat" name="rate"  min= "1" max="10">
+        
+            <label for="fav" id="favouriteCat">
+                <input type="checkbox" name="favourite">
+                    Любимчик
+        </label>
+            <textarea name="description" id="obCat"  placeholder="Описание"></textarea>
+            <button type="submit" id="edit">Редактировать</button>
+
             </div>
         </div>
     </div>
